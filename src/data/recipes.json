@@ -1,0 +1,36 @@
+[
+    {
+      "id": 1,
+      "name": "Spaghetti Carbonara",
+      "ingredients": ["Spaghetti", "Eggs", "Cheese", "Bacon", "Pepper"],
+      "directions": "Boil the spaghetti. Fry the bacon. Mix eggs and cheese, then add to the pasta. Add bacon. Serve with pepper.",
+      "description": "A classic Italian pasta dish from Rome made with egg, hard cheese, cured pork, and black pepper.",
+      "image": "img1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Chicken Curry",
+      "ingredients": ["Chicken", "Onions", "Tomatoes", "Curry Powder", "Salt"],
+      "directions": "Fry the onions. Add chicken pieces. Add tomatoes and curry powder. Simmer until cooked.",
+      "description": "A popular dish made with chicken pieces cooked in a spiced curry sauce.",
+      "image": "img2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Vegetable Stir Fry",
+      "ingredients": ["Broccoli", "Bell Peppers", "Carrots", "Soy Sauce", "Garlic", "Oil"],
+      "directions": "Heat oil in a pan. Add garlic. Add and sauté vegetables until slightly tender. Pour soy sauce and stir well. Serve hot.",
+      "description": "A quick and colorful dish that can be served as a side or main. Packed with crunchy veggies and a simple stir fry sauce.",
+      "image": "img3.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Cheeseburger",
+      "ingredients": ["Beef Patty", "Cheese", "Lettuce", "Tomato", "Onions", "Bun", "Ketchup", "Mustard"],
+      "directions": "Grill the beef patty until cooked to desired doneness. Place cheese on patty to melt. Toast the bun. Assemble the burger with lettuce, tomato, onions, and sauces.",
+      "description": "A classic American fast-food dish. Juicy beef patty with melted cheese, served in a toasted bun with various toppings.",
+      "image": "img4.jpg"
+    }
+]
+  
+  
