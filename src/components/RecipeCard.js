@@ -1,6 +1,10 @@
 import React from "react";
+import { useEffect } from "react";
 
 function RecipeCard({ recipe, onRemove }) {
+    useEffect(() => {
+        console.log("Rendering recipe:", recipe.name);
+    }, []);
     return (
         <div>
             <h3>{recipe.name}</h3>
