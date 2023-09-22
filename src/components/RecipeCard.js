@@ -1,6 +1,6 @@
 import React from "react";
 
-function RecipeCard({ recipe }) {
+function RecipeCard({ recipe, onRemove }) {
     return (
         <div>
             <h3>{recipe.name}</h3>
@@ -8,7 +8,7 @@ function RecipeCard({ recipe }) {
             <p><strong>Ingredients:</strong> {recipe.ingredients.join(', ')}</p>
             <p><strong>Directions:</strong> {recipe.directions}</p>
             <p><strong>Description:</strong> {recipe.description}</p>
-            {/* Placeholder for remove button to be added later */}
+            <button onClick={() => onRemove(recipe.id)}>Remove</button>
         </div>
     );
 }
