@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function AddRecipe() {
+function AddRecipe({ onAddRecipe, highestId }) {
     const [formData, setFormData] = useState({
         name: '',
         ingredients: '',
@@ -16,7 +16,22 @@ function AddRecipe() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-    }
+        const ingredientsArray = formData.ingredients.split(',').map(item => item.trim());
+
+        const newId = highestId + 1;
+        const newRecipe = { ...formData, ingredients: ingredientsArray, id: newId };
+        console.log("About to call onAddRecipe with:", newRecipe);
+
+        onAddRecipe(newRecipe);
+
+        setFormData({
+            name: '',
+            ingredients: '',
+            directions: '',
+            description: '',
+            image: ''
+        });
+    };
 
     return (
         <div>
@@ -32,7 +47,7 @@ function AddRecipe() {
                 value={formData.description} onChange={handleChange} />
                 <select name="image" value={formData.image} onChange={handleChange}>
                     <option value="">Select an Image</option>
-                    <option value="cooking-recipes\src\assets\SpaghettiCarbonara.jpg">Placeholder 1</option>
+                    <option value="/SpaghettiCarbonara.jpg">Placeholder 1</option>
                 </select>
                 <button type="submit">Add Recipe</button>
             </form>

@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import recipes from '../data/recipes.json';
 import RecipeCard from './RecipeCard';
+import AddRecipe from './AddRecipe';
 
 function Home() {
     const [currentRecipes, setCurrentRecipes] = useState(recipes);
@@ -13,16 +15,30 @@ function Home() {
 
     };
 
-    useEffect(() => {
-        console.log("Updated number of recipes:", currentRecipes.length);
-    }, [currentRecipes]);
+    const handleAddRecipe = (newRecipe) => {
+        console.log("handleAddRecipe called with:", newRecipe);
+        setCurrentRecipes(prevRecipes => [...prevRecipes, newRecipe]);
+    };
+    
 
     return (
         <div>
-            <h2>All Recipes</h2>
-            {currentRecipes.map(recipe => (
-                <RecipeCard key={recipe.id} recipe={recipe} onRemove={handleRemove} />
-            ))}
+            <Routes>
+                <Route path="/*" element={
+                    <div>
+                        <h2>All Recipes</h2>
+                        {currentRecipes.map(recipe => (
+                            <RecipeCard key={recipe.id} recipe={recipe} onRemove={handleRemove} />
+                        ))}
+                    </div>
+                } />
+                <Route path="/add" element={
+                <AddRecipe 
+                    onAddRecipe={handleAddRecipe} 
+                    highestId={Math.max(...currentRecipes.map(r => r.id))} 
+                    />
+                } />
+                </Routes> 
         </div>
     );
 }
