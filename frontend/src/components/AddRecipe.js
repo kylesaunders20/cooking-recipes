@@ -15,6 +15,13 @@ function AddRecipe({ onAddRecipe, highestId }) {
         setFormData(prevState => ({ ...prevState, [name]: value }));
     };
 
+    const handleFileChange = (e) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            image: e.target.files[0]
+        }));
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const ingredientsArray = formData.ingredients.split(',').map(item => item.trim());
@@ -63,11 +70,8 @@ function AddRecipe({ onAddRecipe, highestId }) {
                                 value={formData.description} onChange={handleChange} />
                         </Form.Group>
                         <Form.Group controlId="recipeImage">
-                            <Form.Label>Select Image</Form.Label>
-                            <Form.Control as="select" name="image" value={formData.image} onChange={handleChange}>
-                                <option value="">Select an Image</option>
-                                <option value="/Cheeseburger.jpg">Placeholder 1</option>
-                            </Form.Control>
+                            <Form.Label>Upload Image</Form.Label>
+                            <Form.Control type="file" name="image" onChange={handleFileChange} required />
                         </Form.Group>
                         <Button variant="primary" type="submit">Add Recipe</Button>
                     </Form>
