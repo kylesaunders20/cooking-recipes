@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import recipes from '../data/recipes.json';
 import RecipeCard from './RecipeCard';
@@ -6,7 +6,14 @@ import AddRecipe from './AddRecipe';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 function Home() {
-    const [currentRecipes, setCurrentRecipes] = useState(recipes);
+    const [currentRecipes, setCurrentRecipes] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/recipes')
+            .then(response => response.json())
+            .then(data => setCurrentRecipes(data))
+            .catch(error => console.error('Error fetching recipes:', error));
+    }, []);
 
     const handleRemove = (id) => {
         console.log("Removing recipe with ID:", id);

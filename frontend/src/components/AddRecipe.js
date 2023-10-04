@@ -22,26 +22,29 @@ function AddRecipe({ onAddRecipe, highestId }) {
         }));
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const ingredientsArray = formData.ingredients.split(',').map(item => item.trim());
-
-        const newId = highestId + 1;
-        const newRecipe = { ...formData, ingredients: ingredientsArray, id: newId };
-        console.log("New recipe object:", newRecipe);
-
-        console.log("About to call onAddRecipe with:", newRecipe);
-
-        onAddRecipe(newRecipe);
-
-        setFormData({
-            name: '',
-            ingredients: '',
-            directions: '',
-            description: '',
-            image: ''
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        const formDataObj = new FormData();
+        Object.keys(formData).forEach((key) => {
+            formDataObj.append(key, formData[key]);
+        });
+    
+        // Send formDataObj to the backend using an HTTP POST request
+        fetch('/api/recipes', {
+            method: 'POST',
+            body: formDataObj
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Recipe submitted successfully!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
         });
     };
+    
 
     return (
         <Container>
