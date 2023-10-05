@@ -31,7 +31,7 @@ function AddRecipe({ onAddRecipe, highestId }) {
         });
     
         // Send formDataObj to the backend using an HTTP POST request
-        fetch('/api/recipes', {
+        fetch('/api/addRecipe', {
             method: 'POST',
             body: formDataObj
         })

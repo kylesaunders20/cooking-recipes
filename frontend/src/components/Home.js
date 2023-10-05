@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import recipes from '../data/recipes.json';
 import RecipeCard from './RecipeCard';
 import AddRecipe from './AddRecipe';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
@@ -17,10 +16,18 @@ function Home() {
 
     const handleRemove = (id) => {
         console.log("Removing recipe with ID:", id);
-        const updatedRecipes = currentRecipes.filter(recipe => recipe.id !== id);
-        setCurrentRecipes(updatedRecipes);
-        console.log("Number of recipes after removal:", currentRecipes.length);
-
+        fetch(`/api/removeRecipe`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ recipeName: id }) 
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            const updatedRecipes = currentRecipes.filter(recipe => recipe.name !== id);
+            setCurrentRecipes(updatedRecipes);
+        })
+        .catch(error => console.error('Error:', error));
     };
 
     const handleAddRecipe = (newRecipe) => {
@@ -46,14 +53,7 @@ function Home() {
                         <Row>
                             {currentRecipes.map(recipe => (
                                 <Col xs={12} md={6} lg={4} key={recipe.id}>
-                                    <Card className="mb-4">
-                                        <Card.Img variant="top" src={recipe.image} />
-                                        <Card.Body>
-                                            <Card.Title>{recipe.name}</Card.Title>
-                                            <Card.Text>{recipe.description}</Card.Text>
-                                            <Button variant="danger" onClick={() => handleRemove(recipe.id)}>Delete</Button>
-                                        </Card.Body>
-                                    </Card>
+                                    <RecipeCard recipe={recipe} onRemove={handleRemove} />
                                 </Col>
                             ))}
                         </Row>
